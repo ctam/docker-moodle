@@ -14,6 +14,9 @@ services:
             - db:db.moodle.dev
         depends_on:
             - db
+        # environment:
+        #   XDEBUG_CONFIG: "remote_host=192.168.1.15"
+        #   PHP_IDE_CONFIG: "serverName=moodle.dev"
 
     db:
         # Moodle 2.7 does not support 5.7.0 which changed storage_engine to default_storage_engine MDL-50633

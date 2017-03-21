@@ -15,15 +15,22 @@ FROM php:5-apache
 #     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false libicu-dev libpng-dev libxml2-dev zlib1g-dev
 #     && apt-get purge
 
-# Install Moodle PHP dependency
-
+##
+# Install PHP Extensions specific to Moodle
+##
 RUN set -xe \
         && installDeps=" \
                          libicu-dev \
                          libpng-dev \
                          libxml2-dev \
                          zlib1g-dev \
+                         libldap2-dev \
                        " \
-        && apt-get update && apt-get install -y $installDeps php5-gd php5-intl --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-        && docker-php-ext-install -j$(nproc) gd intl mysqli opcache soap xmlrpc zip \
+        && apt-get update && apt-get install -y $installDeps php5-gd php5-intl php5-ldap --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+        && docker-php-ext-install -j$(nproc) gd intl mysqli opcache soap xmlrpc zip ldap \
         && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $installDeps
+
+##
+# Install PECL extensions
+##
+RUN apt-get update && apt-get install -y php5-xdebug
