@@ -2,13 +2,8 @@
 Work in progress.
 Create a dockerfile for Moodle.
 
-# Todos
-1. looks like these php extensions need more work to install:
-* gd, intl, mysql, xmlrpc
-
-2. Create a Dockerfile for development with xdebug, debug turned on etc.
-
-# Optional
-1. Install php ldap module:
-* apt-get update
-* apt-get install php5-ldap
+# Setup
+1. After you clone this repo, also clone https://github.com/moodle/moodle.git, so you will have a copy of Moodle source to start the site:
+`git clone https://github.com/moodle/moodle.git`
+2. Run `docker-compose up` to bring up the site.
+3. Visit `http://localhost` and continue setting up Moodle
