@@ -27,6 +27,8 @@ RUN set -xe \
                          libldap2-dev \
                        " \
         && apt-get update && apt-get install -y $installDeps php5-gd php5-intl php5-ldap --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+        && ln -s /usr/lib/x86_64-linux-gnu/liblber.so /usr/lib/ \
+        && ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/ \
         && docker-php-ext-install -j$(nproc) gd intl mysqli opcache soap xmlrpc zip ldap \
         && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $installDeps
 
